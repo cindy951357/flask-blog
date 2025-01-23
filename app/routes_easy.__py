@@ -1,0 +1,22 @@
+from flask import Flask, Blueprint, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+
+# app = Flask(__name__)
+# db = SQLAlchemy(app)
+# api = Blueprint('api', __name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://cindy:cindymysql2@localhost/blog_db'
+
+
+@api.route('/posts', methods=['GET'])
+def get_posts():
+    # 假設資料來自資料庫
+    sample_posts = [
+        {"id": 1, "title": "First Post", "content": "This is a sample post."},
+        {"id": 2, "title": "Second Post", "content": "Another post content."}
+    ]
+    return jsonify(sample_posts)
+
+@api.route('/posts', methods=['POST'])
+def create_post():
+    data = request.get_json()
+    return jsonify({"message": "Post created", "data": data}), 201
